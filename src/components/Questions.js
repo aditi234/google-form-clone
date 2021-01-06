@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Options from "./Options";
+import { GrFormTrash } from 'react-icons/gr';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -104,7 +105,7 @@ function Questions({ ques, setQues, q, keyy }) {
         </select>
         <div class="answer">{renderElement()}</div>
       </form>
-      <button onClick={deleteQuesHandler}>del</button>
+      <button onClick={deleteQuesHandler}><GrFormTrash size="25px"/></button>
     </div>
   );
 }

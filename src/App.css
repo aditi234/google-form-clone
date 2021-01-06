@@ -2,30 +2,46 @@
   .box {
     width: 60%;
   }
+  
 }
+
+img{
+ width:50px;
+ height: 50px;
+ margin: 3px;
+}
+
 body {
-  background-color: #f5e6ff;
-  margin: 0;
+  background-color:#dcdcdc;
+  margin: auto;
 }
+
 .App {
   font-family: sans-serif;
+  
 }
 
 .navigation {
   background-color: white;
   color: black;
-  padding: 2.5rem;
+  padding: 0.5rem;
+  border-bottom: black;
+  display: flex;
 }
 
 .box {
   border: 1px solid;
   padding: 10px;
-  box-shadow: 5px 10px #333399;
+  box-shadow: 5px 10px rgb(80, 79, 79);
   border-radius: 10px;
   display: block;
   margin: 20px;
+  
 }
 
 button {
   margin: 10px;
+  padding: 2px;
+ background-color:#dcdcdc;
+ border: none;
 }
