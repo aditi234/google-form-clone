@@ -1,25 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import Title from "./components/Title";
+import QuestionsList from "./components/QuestionsList";
 
-function App() {
+export default function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <nav class="navigation container">
+        <div class="nav-brand">Untitled form</div>
+      </nav>
+      <h1 style={{ textAlign: "center", color: "#333399" }}>Form</h1>
+      <Title />
+      <QuestionsList />
     </div>
   );
 }
-
-export default App;
