@@ -11,12 +11,21 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function Title() {
+function Title({ formName, setFormName }) {
   const classes = useStyles();
+
+  const setFormNameHandler = (e) => {
+    setFormName(e.target.value);
+  };
+
   return (
     <div class="box">
       <form className={classes.root} noValidate autoComplete="off">
-        <TextField id="standard-basic" placeholder="Untitled Form" />
+        <TextField
+          onChange={setFormNameHandler}
+          id="standard-basic"
+          placeholder="Untitled Form"
+        />
         <TextField id="standard-basic" placeholder="Form Description" />
       </form>
     </div>

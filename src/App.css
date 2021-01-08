@@ -35,8 +35,8 @@ body {
   box-shadow: 5px 10px rgb(80, 79, 79);
   border-radius: 10px;
   display: block;
-  margin: 20px;
-  
+  margin: auto;
+  margin-top: 20px;
 }
 
 button {
