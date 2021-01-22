@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Options from "./Options";
-import { GrFormTrash } from 'react-icons/gr';
+import ImageOptions from "./ImageOptions";
+import { GrFormTrash } from "react-icons/gr";
+import { BsFillImageFill } from "react-icons/bs";
+import { storage } from "../config/firebaseConfig";
+import { IoMdAddCircle } from "react-icons/io";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,8 +21,11 @@ function Questions({ ques, setQues, q, keyy }) {
   const classes = useStyles();
   const [answerType, setAnswerType] = useState("3");
   const [inputQues, setInputQues] = useState("");
-  const [option, setOption] = useState([]);
+  const [textOption, setTextOption] = useState([]);
   const [ans, setAns] = useState("");
+  const [url, setUrl] = useState("");
+  // const [uploading,setUploading]=useState("false");
+  const [imageOption, setImageOption] = useState([]);
 
   //updating question
   const InputQuesHandler = (e) => {
@@ -29,11 +36,45 @@ function Questions({ ques, setQues, q, keyy }) {
     setAns(e.target.value);
   };
 
-  //udpating option list(adding options)
-  const addOptionHandler = (e) => {
+  //udpating option list only text(adding options)
+  const addTextOptionHandler = (e) => {
     e.preventDefault();
-    setOption([...option, { text: ans, id: Math.random() * 1000 }]);
+    setTextOption([...textOption, { text: ans, id: Math.random() * 1000 }]);
     setAns("");
+  };
+  //updating option list only image(adding options)
+  const addImageOptionHandler = (e) => {
+    if (e.target.files[0]) {
+      // setUploading("true");
+      const image = e.target.files[0];
+      console.log(image.name);
+      const uploadTask = storage.ref(`images/${image.name}`).put(image);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          console.log(snapshot);
+        },
+        (error) => {
+          console.log(error);
+        },
+        () => {
+          storage
+            .ref("images")
+            .child(image.name)
+            .getDownloadURL()
+            .then((url) => {
+              setUrl(url);
+              setImageOption([
+                ...imageOption,
+                { URL: url, imageId: Math.random() }
+              ]);
+              setUrl("");
+              // setUploading("false");
+              console.log(url);
+            });
+        }
+      );
+    }
   };
 
   //Drop down list
@@ -62,15 +103,30 @@ function Questions({ ques, setQues, q, keyy }) {
             id="standard-basic"
             placeholder="Enter Option"
           />
-          <button onClick={addOptionHandler}>Add Option</button>
+          <label id="add">
+            <IoMdAddCircle size="25px" onClick={addTextOptionHandler} />
+          </label>
+          <label htmlFor="single">
+            <BsFillImageFill size="25px" />
+          </label>
+          <input type="file" id="single" onChange={addImageOptionHandler} />
           <div>
-            {option.map((op) => (
+            {textOption.map((op) => (
               <Options
                 text={op.text}
-                option={option}
-                setOption={setOption}
+                textOption={textOption}
+                setTextOption={setTextOption}
                 key={op.id}
                 op={op}
+              />
+            ))}
+            {imageOption.map((im) => (
+              <ImageOptions
+                URL={im.URL}
+                imageOption={imageOption}
+                setImageOption={setImageOption}
+                im={im}
+                // uploading={uploading}
               />
             ))}
           </div>
@@ -105,7 +161,9 @@ function Questions({ ques, setQues, q, keyy }) {
         </select>
         <div class="answer">{renderElement()}</div>
       </form>
-      <button onClick={deleteQuesHandler}><GrFormTrash size="25px"/></button>
+      <button onClick={deleteQuesHandler}>
+        <GrFormTrash size="25px" />
+      </button>
     </div>
   );
 }

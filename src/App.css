@@ -1,24 +1,16 @@
-@media (min-width: 768px) {
-  .box {
-    width: 60%;
-  }
-  
-}
-
-img{
- width:50px;
- height: 50px;
- margin: 3px;
+img {
+  width: 50px;
+  height: 50px;
+  margin: 3px;
 }
 
 body {
-  background-color:#dcdcdc;
+  background-color: #dcdcdc;
   margin: auto;
 }
 
 .App {
   font-family: sans-serif;
-  
 }
 
 .navigation {
@@ -35,13 +27,38 @@ body {
   box-shadow: 5px 10px rgb(80, 79, 79);
   border-radius: 10px;
   display: block;
-  margin: auto;
-  margin-top: 20px;
+  margin: 20px;
 }
 
 button {
   margin: 10px;
   padding: 2px;
- background-color:#dcdcdc;
- border: none;
+  background-color: #dcdcdc;
+  border: none;
+}
+
+@media (min-width: 768px) {
+  .box {
+    width: 60%;
+    margin: auto;
+    margin-top: 20px;
+  }
+}
+
+.ImageOption img {
+  width: 300px;
+  height: 200px;
+  border: #fff solid 6px;
+  margin: 20px;
+}
+
+@media (max-width: 360px) {
+  .ImageOption img {
+    width: 200px;
+    height: 100px;
+  }
+}
+
+#add {
+  margin-right: 10px;
 }

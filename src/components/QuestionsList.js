@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Questions from "./Questions";
-import { IoMdAddCircle } from 'react-icons/io';
+import { IoMdAddCircle } from "react-icons/io";
 
 function QuestionList() {
   const [ques, setQues] = useState([]);
@@ -14,7 +14,9 @@ function QuestionList() {
       {ques.map((q) => (
         <Questions ques={ques} setQues={setQues} keyy={q.qid} q={q} />
       ))}
-      <button onClick={addQuesHandler}><IoMdAddCircle size="30px"/></button>
+      <button onClick={addQuesHandler}>
+        <IoMdAddCircle size="30px" />
+      </button>
     </div>
   );
 }
